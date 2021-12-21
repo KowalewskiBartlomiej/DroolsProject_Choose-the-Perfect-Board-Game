@@ -1,0 +1,741 @@
+package com.drools.example
+
+import org.kie.api.runtime.KieRuntime
+import com.drools.example.Response
+import java.util.ArrayList
+import java.util.List
+import java.util.Arrays;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+global JFrame frame
+global javax.swing.JTextArea textArea
+
+
+rule "Are you a huge nerd?"
+    when
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Are you a huge nerd?", options);
+    insert (answer);
+end
+
+rule "Are you a huge nerd?: No"
+    when
+    Response(question == "Are you a huge nerd?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you think everyone should just get along?", options);
+    insert (answer);
+end
+
+rule "Do you think everyone should just get along?: No"
+    when
+    Response(question == "Do you think everyone should just get along?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you like to gamble?", options);
+    insert (answer);
+end
+
+rule "Do you like to gamble?: No"
+    when
+    Response(question == "Do you like to gamble?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Are you over 50 years old?", options);
+    insert (answer);
+end
+
+rule "Are you over 50 years old?: No"
+    when
+    Response(question == "Are you over 50 years old?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Party Game?", options);
+    insert (answer);
+end
+
+rule "Party Game?: No"
+    when
+    Response(question == "Party Game?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Are you a know it all?", options);
+    insert (answer);
+end
+
+rule "Are you a know it all?: No"
+    when
+    Response(question == "Are you a know it all?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Get straight A's?", options);
+    insert (answer);
+end
+
+rule "Get straight A's?: No"
+    when
+    Response(question == "Get straight A's?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you have a train fetish?", options);
+    insert (answer);
+end
+
+rule "Do you have a train fetish?: No"
+    when
+    Response(question == "Do you have a train fetish?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Simple Rules?", options);
+    insert (answer);
+end
+
+rule "Simple Rules?: No"
+    when
+    Response(question == "Simple Rules?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Constant hard choices?", options);
+    insert (answer);
+end
+
+rule "Constant hard choices?: No"
+    when
+    Response(question == "Constant hard choices?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Card/deck based game?", options);
+    insert (answer);
+end
+
+rule "Card/deck based game?: No"
+    when
+    Response(question == "Card/deck based game?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you like to plan your strat. before your turn?", options);
+    insert (answer);
+end
+
+rule "Do you like to plan your strat. before your turn?: No"
+    when
+    Response(question == "Do you like to plan your strat. before your turn?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("Turns");
+    options.add("No D.T.");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Defined turns or no down", options);
+    insert (answer);
+end
+
+rule "Defined turns or no down: Turns (Carcassone)"
+    when
+    Response(question == "Defined turns or no down" && answer == "Turns")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Carcassonne");
+end
+
+
+rule "Defined turns or no down: No D.T. (Pillars of the Earth)"
+    when
+    Response(question == "Defined turns or no down" && answer == "No D.T.")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Pillars of the Earth");
+end
+
+
+rule "Do you like to plan your strat. before your turn?: Yes (Settlers of Catan)"
+    when
+    Response(question == "Do you like to plan your strat. before your turn?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Settlers of Catan");
+end
+
+
+rule "Card/deck based game?: Yes"
+    when
+    Response(question == "Card/deck based game?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("Less");
+    options.add("More");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Complexity?", options);
+    insert (answer);
+end
+
+rule "Complexity?: Less (Dominion)"
+    when
+    Response(question == "Complexity?" && answer == "Less")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Dominion");
+end
+
+
+rule "Complexity?: More (7 Wonders)"
+    when
+    Response(question == "Complexity?" && answer == "More")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "7 Wonders");
+end
+
+
+rule "Constant hard choices?: Yes"
+    when
+    Response(question == "Constant hard choices?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Farming fetish?", options);
+    insert (answer);
+end
+
+rule "Farming fetish?: No"
+    when
+    Response(question == "Farming fetish?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you mind having to buy two games?", options);
+    insert (answer);
+end
+
+rule "Do you mind having to buy two games?: No (Cities and Knights)"
+    when
+    Response(question == "Do you mind having to buy two games?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Cities and Knights");
+end
+
+
+rule "Do you mind having to buy two games?: Yes"
+    when
+    Response(question == "Do you mind having to buy two games?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Are all players serious board game geeks?", options);
+    insert (answer);
+end
+
+rule "Are all players serious board game geeks?: No (Domaine)"
+    when
+    Response(question == "Are all players serious board game geeks?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Domaine");
+end
+
+
+rule "Are all players serious board game geeks?: Yes (Puerto Rico)"
+    when
+    Response(question == "Are all players serious board game geeks?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Puerto Rico");
+end
+
+
+rule "Farming fetish?: Yes (Agricola)"
+    when
+    Response(question == "Farming fetish?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Agricola");
+end
+
+
+rule "Simple Rules?: Yes"
+    when
+    Response(question == "Simple Rules?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("Words");
+    options.add("Tiles");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Words or tiles?", options);
+    insert (answer);
+end
+
+rule "Words or tiles?: Words (Scattergories)"
+    when
+    Response(question == "Words or tiles?" && answer == "Words")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Scattergories");
+end
+
+
+rule "Words or tiles?: Tiles (Qwirkle)"
+    when
+    Response(question == "Words or tiles?" && answer == "Tiles")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Qwirkle");
+end
+
+
+rule "Do you have a train fetish?: Yes"
+    when
+    Response(question == "Do you have a train fetish?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you enjoy economics?", options);
+    insert (answer);
+end
+
+rule "Do you enjoy economics?: No (Ticket to Ride)"
+    when
+    Response(question == "Do you enjoy economics?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Ticket to Ride");
+end
+
+
+rule "Do you enjoy economics?: Yes (Steam)"
+    when
+    Response(question == "Do you enjoy economics?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Steam");
+end
+
+
+rule "Get straight A's?: Yes (Scrabble)"
+    when
+    Response(question == "Get straight A's?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Scrabble");
+end
+
+
+rule "Are you a know it all?: Yes (Trivial Persuit)"
+    when
+    Response(question == "Are you a know it all?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Trivial Persuit");
+end
+
+
+rule "Party Game?: Yes"
+    when
+    Response(question == "Party Game?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Looking to get laid?", options);
+    insert (answer);
+end
+
+rule "Looking to get laid?: No"
+    when
+    Response(question == "Looking to get laid?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Want to embarrass your friends?", options);
+    insert (answer);
+end
+
+rule "Want to embarrass your friends?: No"
+    when
+    Response(question == "Want to embarrass your friends?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Are you a creative liar?", options);
+    insert (answer);
+end
+
+rule "Are you a creative liar?: No"
+    when
+    Response(question == "Are you a creative liar?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Good with your hands?", options);
+    insert (answer);
+end
+
+rule "Good with your hands?: No (Taboo)"
+    when
+    Response(question == "Good with your hands?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Taboo");
+end
+
+
+rule "Good with your hands?: Yes (Jenga(DK Edition))"
+    when
+    Response(question == "Good with your hands?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Jenga(DK Edition)");
+end
+
+
+rule "Are you a creative liar?: Yes"
+    when
+    Response(question == "Are you a creative liar?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("Trivia");
+    options.add("Words");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Words or trivia?", options);
+    insert (answer);
+end
+
+rule "Words or trivia?: Trivia (Wits and Wagers)"
+    when
+    Response(question == "Words or trivia?" && answer == "Trivia")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Wits and Wagers");
+end
+
+
+rule "Words or trivia?: Words (Beyond Balderdash)"
+    when
+    Response(question == "Words or trivia?" && answer == "Words")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Beyond Balderdash");
+end
+
+
+rule "Want to embarrass your friends?: Yes"
+    when
+    Response(question == "Want to embarrass your friends?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("Artist");
+    options.add("Thug");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you want to be a thug or an artist?", options);
+    insert (answer);
+end
+
+rule "Do you want to be a thug or an artist?: Artist (Cranium)"
+    when
+    Response(question == "Do you want to be a thug or an artist?" && answer == "Artist")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Cranium");
+end
+
+
+rule "Do you want to be a thug or an artist?: Thug (Cash'N'Guns)"
+    when
+    Response(question == "Do you want to be a thug or an artist?" && answer == "Thug")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Cash'N'Guns");
+end
+
+
+rule "Looking to get laid?: Yes (Twister)"
+    when
+    Response(question == "Looking to get laid?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Twister");
+end
+
+
+rule "Are you over 50 years old?: Yes"
+    when
+    Response(question == "Are you over 50 years old?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "More than two of you?", options);
+    insert (answer);
+end
+
+rule "More than two of you?: No"
+    when
+    Response(question == "More than two of you?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Are you in Mensa?", options);
+    insert (answer);
+end
+
+rule "Are you in Mensa?: No (Backgammon)"
+    when
+    Response(question == "Are you in Mensa?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Backgammon");
+end
+
+
+rule "Are you in Mensa?: Yes"
+    when
+    Response(question == "Are you in Mensa?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Chess too cliche?", options);
+    insert (answer);
+end
+
+rule "Chess too cliche?: No (Chess)"
+    when
+    Response(question == "Chess too cliche?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Chess");
+end
+
+
+rule "Chess too cliche?: Yes (Go)"
+    when
+    Response(question == "Chess too cliche?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Go");
+end
+
+
+rule "More than two of you?: Yes (Cribbage)"
+    when
+    Response(question == "More than two of you?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Cribbage");
+end
+
+
+rule "Do you like to gamble?: Yes (Rummoli)"
+    when
+    Response(question == "Do you like to gamble?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Rummoli");
+end
+
+
+rule "Do you think everyone should just get along?: Yes"
+    when
+    Response(question == "Do you think everyone should just get along?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you secretly wish you were a dick? (a P.I)", options);
+    insert (answer);
+end
+
+rule "Do you secretly wish you were a dick? (a P.I): No"
+    when
+    Response(question == "Do you secretly wish you were a dick? (a P.I)" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you have a Monty Python Fetish?", options);
+    insert (answer);
+end
+
+rule "Do you have a Monty Python Fetish?: No"
+    when
+    Response(question == "Do you have a Monty Python Fetish?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Zombies?", options);
+    insert (answer);
+end
+
+rule "Zombies?: No"
+    when
+    Response(question == "Zombies?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("Monster");
+    options.add("Virus");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Would you rather fight monsters or viruses?", options);
+    insert (answer);
+end
+
+rule "Would you rather fight monsters or viruses?: Monster (Dungeon Run)"
+    when
+    Response(question == "Would you rather fight monsters or viruses?" && answer == "Monster")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Dungeon Run");
+end
+
+
+rule "Would you rather fight monsters or viruses?: Virus (Pandemic)"
+    when
+    Response(question == "Would you rather fight monsters or viruses?" && answer == "Virus")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Pandemic");
+end
+
+
+rule "Zombies?: Yes (Last Night on Earth)"
+    when
+    Response(question == "Zombies?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Last Night on Earth");
+end
+
+
+rule "Do you have a Monty Python Fetish?: Yes (Shadows Over Camelot)"
+    when
+    Response(question == "Do you have a Monty Python Fetish?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Shadows Over Camelot");
+end
+
+
+rule "Do you secretly wish you were a dick? (a P.I): Yes (Arkham Horror)"
+    when
+    Response(question == "Do you secretly wish you were a dick? (a P.I)" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Arkham Horror");
+end
+
+
+rule "Are you a huge nerd?: Yes"
+    when
+    Response(question == "Are you a huge nerd?" && answer == "Yes")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you want to spend dozens of hours preparing to play?", options);
+    insert (answer);
+end
+
+rule "Do you want to spend dozens of hours preparing to play?: No"
+    when
+    Response(question == "Do you want to spend dozens of hours preparing to play?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Do you really like spending money?", options);
+    insert (answer);
+end
+
+rule "Do you really like spending money?: No"
+    when
+    Response(question == "Do you really like spending money?" && answer == "No")
+    then
+    ArrayList<String> options = new ArrayList<>();
+    options.add("No");
+    options.add("Yes");
+    Response answer = ask(frame, kcontext.getKieRuntime(), "Does the name Boomer give you wet dreams?", options);
+    insert (answer);
+end
+
+rule "Does the name Boomer give you wet dreams?: No (Cosmic Encounter)"
+    when
+    Response(question == "Does the name Boomer give you wet dreams?" && answer == "No")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Cosmic Encounter");
+end
+
+
+rule "Does the name Boomer give you wet dreams?: Yes (Battlestar Galactica)"
+    when
+    Response(question == "Does the name Boomer give you wet dreams?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Battlestar Galactica");
+end
+
+
+rule "Do you really like spending money?: Yes (Magic)"
+    when
+    Response(question == "Do you really like spending money?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Magic");
+end
+
+
+rule "Do you want to spend dozens of hours preparing to play?: Yes (Warhammer)"
+    when
+    Response(question == "Do you want to spend dozens of hours preparing to play?" && answer == "Yes")
+    then
+    recommend(frame, kcontext.getKieRuntime(), "Warhammer");
+end
+
+function void recommend(JFrame frame, KieRuntime krt, String recommended) {
+    final JPanel panel = new JPanel();
+    String text = recommended;
+    panel.add(new JLabel(text));
+    JOptionPane.showMessageDialog(frame, panel);
+}
+
+function Response ask(JFrame frame, KieRuntime krt, String question, ArrayList answers) {
+
+    class Listener implements ItemListener {
+        private Response answers;
+        private String chosen;
+        public Listener(Response answer, String chosen) {
+            this.answers = answer;
+            this.chosen = chosen;
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                answers.setAnswer(chosen);
+            }
+        }
+    }
+    Response response = new Response(question, answers.get(0).toString());
+
+    final JPanel panel = new JPanel(new GridLayout(0, 1));
+    panel.add(new JLabel(question));
+
+    ArrayList<JRadioButton> buttons = new ArrayList<>();
+
+    for (int i = 0; i < answers.size(); i++) {
+        String text = answers.get(i).toString();
+        JRadioButton radioButton = new JRadioButton(text);
+        Listener newListener = new Listener(response, text);
+        radioButton.addItemListener(newListener);
+        buttons.add(radioButton);
+    }
+
+    buttons.get(0).setSelected(true);
+    response.setAnswer(answers.get(0).toString());
+
+    ButtonGroup group = new ButtonGroup();
+
+    for (int i = 0; i < buttons.size(); i++) {
+        group.add(buttons.get(i));
+        panel.add(buttons.get(i));
+    }
+
+    if (JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE) < 0) {
+        response.setAnswer("Exit program");
+    }
+
+    return response;
+}
